@@ -1,2 +1,2 @@
-# gemini_chat
-Google Gemini chatbot
+React-gpt
+OpenAI React Chatbot
