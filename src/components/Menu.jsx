@@ -3,18 +3,19 @@ import ADD_ICON from "../assets/add.svg";
 import CHAT_ICON from "../assets/chat.svg";
 import SAVE_ICON from "../assets/save.svg";
 
-export const Menu = () => {
+export const Menu = ({menuActive, setMenuActive}) => {
   return (
     <div className="MENU OVERLAY absolute w-lvw  bg-blur">
       <div className="MENU relative w-80 min-h-lvh bg-cream flex flex-col gap-10 p-4 text-mainBlue">
-        <button className="MENU BTN self-end">
+        <button onClick={()=>{setMenuActive(!menuActive)}}
+        className="MENU BTN self-end">
           <img
             src={CLOSE_ICON}
             alt="close-icon"
             className="CLOSE ICON w-6 h-6"
           />
         </button>
-        <button className="ADD BTN flex items-center justify-center text-lg w-64 h-10 border border-mainBlue rounded-2xl mt-6">
+        <button className="ADD BTN flex items-center justify-center text-lg w-64 h-10 border border-mainBlue rounded-[20px] mt-6">
           Add new chat
           <img src={ADD_ICON} alt="add-icon" className="w-5 ml-1" />
         </button>

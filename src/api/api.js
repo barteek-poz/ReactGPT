@@ -1,5 +1,5 @@
 export const response = async (inputValue) => {
-  const data = await fetch("https://api.openai.com/v1/chat/completions", {
+  const res = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -12,8 +12,9 @@ export const response = async (inputValue) => {
       max_tokens: 1000,
     }),
   });
-  const res = await data.json();
-  return res;
+  const data = await res.json();
+  const chatAnswer = data.choices[0].message
+  return chatAnswer;
   // setMessage(res.choices[0].message.content);
   // setMessageHistory([
   //   ...messageHistory,
