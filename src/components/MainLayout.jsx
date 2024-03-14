@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Input from "./Input";
 import Menu from "./Menu";
 import TopBar from "./TopBar";
 import ChatWindow from "./ChatWindow";
@@ -13,7 +12,7 @@ export const MainLayout = () => {
       )}
       <TopBar menuActive={menuActive} setMenuActive={setMenuActive} />
 
-      <div className="LAYOUT CHILDREN flex-1">
+      <div className="LAYOUT CHILDREN">
         <ChatWindow />
       </div>
     </div>

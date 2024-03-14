@@ -1,10 +1,11 @@
 import { useState } from "react";
 import SEND_ICON from "../assets/send.svg";
 
-export const Input = () => {
+export const Input = ({ messageHistory, setMessageHistory, setMessage }) => {
   const [inputValue, setInputValue] = useState("");
 
-  const responseHandler = async () => {
+  const responseHandler = async (e) => {
+    e.preventDefault()
     const res = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -19,24 +20,20 @@ export const Input = () => {
       }),
     });
     const data = await res.json();
-
-    console.log(data);
-    // setMessage(res.choices[0].message.content);
-    // setMessageHistory([
-    //   ...messageHistory,
-    //   {
-    //     question: inputValue,
-    //     answer: res.choices[0].message.content,
-    //   },
-    // ]);
+    setMessage(data.choices[0].message.content);
+    setMessageHistory([
+      ...messageHistory,
+      {
+        question: inputValue,
+        answer: data.choices[0].message.content,
+      },
+    ]);
+    setInputValue('')
   };
 
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        responseHandler();
-      }}
+      onSubmit={responseHandler}
       className="INPUT_DIV flex mx-auto mb-4 justify-between min-w-80 w-1/3 max-h-40  border border-mainBlue rounded-[20px] px-4">
       <input
         value={inputValue}
