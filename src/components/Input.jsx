@@ -1,36 +1,60 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import SEND_ICON from "../assets/send.svg";
+import { ChatContext } from "../context/ChatContext";
 
-export const Input = ({ messageHistory, setMessageHistory, setMessage }) => {
+export const Input = ({ setMessage }) => {
   const [inputValue, setInputValue] = useState("");
+  const ctx = useContext(ChatContext);
 
-  const responseHandler = async (e) => {
-    e.preventDefault()
-    const res = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: inputValue }],
-        temperature: 0.7,
-        max_tokens: 100,
-      }),
-    });
-    const data = await res.json();
-    setMessage(data.choices[0].message.content);
-    setMessageHistory([
-      ...messageHistory,
-      {
-        question: inputValue,
-        answer: data.choices[0].message.content,
-      },
-    ]);
-    setInputValue('')
+  const titleHandler = () => {
+    if (ctx.currentChat.length === 0) {
+      return inputValue;
+    } else {return ctx.currentChat[0].title}
   };
 
+  const responseHandler = async (e) => {
+    e.preventDefault();
+    if (inputValue.length !== 0) {
+      try {
+        const res = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
+          },
+          body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", content: inputValue }],
+            temperature: 0.7,
+            max_tokens: 100,
+          }),
+        });
+        const data = await res.json();
+        setMessage(data.choices[0].message.content);
+        ctx.setCurrentChat([
+          ...ctx.currentChat,
+          {
+            title: titleHandler(),
+            question: inputValue,
+            answer: data.choices[0].message.content,
+          },
+        ]);
+        ctx.setChatHistory([
+          ...ctx.chatHistory,
+          {
+            title: titleHandler(),
+            question: inputValue,
+            answer: data.choices[0].message.content,
+          },
+        ]);
+      } catch (err) {
+        alert(err);
+      }
+      setInputValue("");
+    }
+  };
+  console.log(ctx.currentChat);
+  console.log(ctx.chatHistory);
   return (
     <form
       onSubmit={responseHandler}

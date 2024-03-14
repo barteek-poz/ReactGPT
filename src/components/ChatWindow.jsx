@@ -1,17 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ChatMessage from "./ChatMessage";
 import Input from "./Input";
 import UserMessage from "./UserMessage";
+import { ChatContext } from "../context/ChatContext";
 
 const ChatWindow = () => {
   const [message, setMessage] = useState(null);
-  const [messageHistory, setMessageHistory] = useState([]);
-
-  console.log(messageHistory);
+  const ctx = useContext(ChatContext);
+ 
   return (
     <div>
-      {messageHistory.length > 0 &&
-        messageHistory.map((message, index) => {
+      {ctx.currentChat.length > 0 &&
+        ctx.currentChat.map((message, index) => {
           return (
             <div key={index}>
               <UserMessage question={message.question} />
@@ -22,8 +22,7 @@ const ChatWindow = () => {
 
       <Input
         setMessage={setMessage}
-        messageHistory={messageHistory}
-        setMessageHistory={setMessageHistory}
+       
       />
     </div>
   );
