@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import SEND_ICON from "../assets/send.svg";
 import { ChatContext } from "../context/ChatContext";
 
-export const Input = ({ setMessage }) => {
+export const Input = () => {
   const [inputValue, setInputValue] = useState("");
   const ctx = useContext(ChatContext);
 
@@ -30,7 +30,6 @@ export const Input = ({ setMessage }) => {
           }),
         });
         const data = await res.json();
-        setMessage(data.choices[0].message.content);
         ctx.setCurrentChat([
           ...ctx.currentChat,
           {
@@ -53,8 +52,7 @@ export const Input = ({ setMessage }) => {
       setInputValue("");
     }
   };
-  console.log(ctx.currentChat);
-  console.log(ctx.chatHistory);
+ 
   return (
     <form
       onSubmit={responseHandler}

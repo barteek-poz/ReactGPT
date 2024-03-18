@@ -8,6 +8,7 @@ export const MainLayout = () => {
   const [menuActive, setMenuActive] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
   const [currentChat, setCurrentChat] = useState([]);
+ 
 
   return (
     <ChatContext.Provider

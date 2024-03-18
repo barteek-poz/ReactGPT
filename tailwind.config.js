@@ -8,6 +8,16 @@ export default {
         cream: "rgba(244, 244, 244, 1)",
         blur: "rgba(0,0,0,.5)",
       },
+      keyframes: {
+        slideIn: {
+          "0%": { width: "0%" },
+          "50%": { width: "50%" },
+          "100%": { width: "100%" },
+        },
+      },
+      animation: {
+        slideIn: "slideIn .2s linear ",
+      },
     },
   },
   plugins: [],

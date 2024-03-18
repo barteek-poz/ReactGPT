@@ -1,13 +1,12 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import ChatMessage from "./ChatMessage";
 import Input from "./Input";
 import UserMessage from "./UserMessage";
 import { ChatContext } from "../context/ChatContext";
 
 const ChatWindow = () => {
-  const [message, setMessage] = useState(null);
   const ctx = useContext(ChatContext);
- 
+
   return (
     <div>
       {ctx.currentChat.length > 0 &&
@@ -20,10 +19,7 @@ const ChatWindow = () => {
           );
         })}
 
-      <Input
-        setMessage={setMessage}
-       
-      />
+      <Input />
     </div>
   );
 };
