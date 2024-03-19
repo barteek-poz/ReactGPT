@@ -8,7 +8,7 @@ const ChatWindow = () => {
   const ctx = useContext(ChatContext);
 
   return (
-    <div>
+    <div className="lg:mx-auto">
       {ctx.currentChat.length > 0 &&
         ctx.currentChat.map((message, index) => {
           return (

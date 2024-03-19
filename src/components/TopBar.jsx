@@ -3,6 +3,7 @@ export const TopBar = ( {menuActive, setMenuActive }) => {
   return (
     <div className="TOPBAR flex items-center justify-between p-4">
       <button
+      className="block lg:hidden"
         onClick={() => {
           setMenuActive(!menuActive);
         }}>

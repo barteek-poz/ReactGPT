@@ -56,7 +56,7 @@ export const Input = () => {
   return (
     <form
       onSubmit={responseHandler}
-      className="INPUT_DIV flex mx-auto mb-4 justify-between min-w-80 w-1/3 max-h-40  border border-mainBlue rounded-[20px] px-4">
+      className="INPUT_DIV flex mx-auto mb-4 justify-between min-w-80 w-1/3 sm:w-[500px] md:w-[650px] max-h-40  border border-mainBlue rounded-[20px] px-4">
       <input
         value={inputValue}
         onChange={(e) => {

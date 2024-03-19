@@ -25,13 +25,13 @@ export const Menu = ({ menuActive, setMenuActive }) => {
 
   return (
     
-    <div className="MENU OVERLAY fixed w-lvw bg-blur ">
-      <div className="MENU relative w-80 min-h-lvh bg-cream flex flex-col items-start gap-10 p-4 text-mainBlue animate-slideIn">
+    <div className="MENU OVERLAY fixed lg:relative w-lvw bg-blur animate-slideIn lg:w-80">
+      <div className="MENU w-80 min-h-lvh bg-cream flex flex-col items-start gap-10 p-4 text-mainBlue ">
         <button
           onClick={() => {
             setMenuActive(!menuActive);
           }}
-          className="MENU BTN self-end">
+          className="MENU BTN self-end lg:hidden">
           <img
             src={CLOSE_ICON}
             alt="close-icon"
@@ -40,7 +40,7 @@ export const Menu = ({ menuActive, setMenuActive }) => {
         </button>
         <button
           onClick={newChatHandler}
-          className="ADD BTN mx-auto flex items-center justify-center text-lg w-64 h-10 border border-mainBlue rounded-[20px] mt-6">
+          className="ADD BTN mx-auto flex items-center justify-center text-lg w-64 h-10 border border-mainBlue rounded-[20px] mt-6 lg:mt-10">
           Add new chat
           <img src={ADD_ICON} alt="add-icon" className="w-5 ml-1" />
         </button>
@@ -62,7 +62,7 @@ export const Menu = ({ menuActive, setMenuActive }) => {
 
        
       </div>
-    </div>
+     </div>
   );
 };
 
